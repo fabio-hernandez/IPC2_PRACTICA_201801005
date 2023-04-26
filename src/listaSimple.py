@@ -1,3 +1,6 @@
+from colorama import Fore, init
+
+
 class Nodo:
 
     def __init__(self, dato=None, siguiente=None):
@@ -25,31 +28,35 @@ class listaSimple:
             self.tamanio += 1
 
     def ordenar(self, llave):
-        if not self.cabeza or not self.cabeza.siguiente:
-            return
         aux = self.cabeza
         while aux:
-            min_node = aux  
+            minimo = aux
             siguiente = aux.siguiente
             while siguiente:
-                if siguiente.dato[llave] < min_node.dato[llave]:
-                    min_node = siguiente
+                if float(getattr(siguiente.dato, llave)) < float(getattr(minimo.dato, llave)):
+                    minimo = siguiente
                 siguiente = siguiente.siguiente
-            if aux != min_node:
-                aux.dato, min_node.dato = min_node.dato, aux.dato
+            if aux != minimo:
+                aux.dato, minimo.dato = minimo.dato, aux.dato
             aux = aux.siguiente
+        self.imprimir10(llave)
 
-    def get_top_10(self):
-        top_10 = []
-        aux = self.cabeza
-        for i in range(10):
-            if aux:
-                top_10.append(aux.dato)
-                aux = aux.siguiente
-        return top_10
-
-    def imprimir(self):
+    def imprimir(self, llave):
+        cad = llave
+        cad += ':'
         aux = self.cabeza
         while aux is not None:
-            print('Code: ', aux.dato.codigo)
+            print('Codigo: ', aux.dato.codigo)
+            print(cad, str(getattr(aux.dato, llave)))
             aux = aux.siguiente
+
+    def imprimir10(self, llave):
+        cad = llave
+        cad += ':'
+        aux = self.cabeza
+        for i in range(1, 11):
+            if aux:
+                print(Fore.CYAN + str(i) + '.'+Fore.YELLOW +
+                      'Codigo: '+Fore.RESET + aux.dato.codigo +
+                      Fore.LIGHTRED_EX + ' - '+Fore.YELLOW + cad + Fore.RESET + str(getattr(aux.dato, llave)))
+                aux = aux.siguiente
