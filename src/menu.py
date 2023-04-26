@@ -91,5 +91,6 @@ class menu:
         listaProductos.ordenar('Margen3')
 
     def top10Inventario(self):
-        print(Fore.GREEN + 'Top 10 productos con mayor valor de Inventario' + Fore.RESET)
+        print(Fore.LIGHTMAGENTA_EX +
+              'Top 10 productos con mayor valor de Inventario' + Fore.RESET)
         listaProductos.ordenar('valorInventario')

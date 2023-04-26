@@ -41,15 +41,6 @@ class listaSimple:
             aux = aux.siguiente
         self.imprimir10(llave)
 
-    def imprimir(self, llave):
-        cad = llave
-        cad += ':'
-        aux = self.cabeza
-        while aux is not None:
-            print('Codigo: ', aux.dato.codigo)
-            print(cad, str(getattr(aux.dato, llave)))
-            aux = aux.siguiente
-
     def imprimir10(self, llave):
         cad = llave
         cad += ':'
@@ -60,3 +51,14 @@ class listaSimple:
                       'Codigo: '+Fore.RESET + aux.dato.codigo +
                       Fore.LIGHTRED_EX + ' - '+Fore.YELLOW + cad + Fore.RESET + str(getattr(aux.dato, llave)))
                 aux = aux.siguiente
+
+    def imprimir(self, llave):
+        cad = llave
+        cad += ':'
+        aux = self.cabeza
+        while aux is not None:
+            print('Codigo: ', aux.dato.codigo)
+            print(cad, str(getattr(aux.dato, llave)))
+            aux = aux.siguiente
+
+    
