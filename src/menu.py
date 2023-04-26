@@ -1,5 +1,12 @@
+from tkinter import filedialog
+from listaSimple import listaSimple
+import xml.etree.ElementTree as ET
+from item import Item
 from colorama import Fore, init
 init()
+
+listaProductos = listaSimple()
+
 
 class menu:
 
@@ -30,9 +37,9 @@ class menu:
                         print(
                             Fore.LIGHTRED_EX+'Archivo no cargado, por favor carga primero un archivo'+Fore.RESET)
                     else:
-                        self.procesamiento()
+                        self.top10Ganancias()
                 elif eleccion == 3:
-                    self.crearArchivo()
+                    self.top10Inventario()
                 elif eleccion == 4:
                     print(Fore.LIGHTMAGENTA_EX +
                           'Fabio Josué Hernández Martinez - 201801005 - IPC2 "D"')
@@ -42,4 +49,28 @@ class menu:
                 else:
                     print(Fore.LIGHTRED_EX+'* Opción Inválida *'+Fore.RESET)
 
-    
+    def carga(self):
+        ruta = filedialog.askopenfilename(title="Seleccione un archivo")
+        file = open(ruta, "r", encoding="utf-8")
+        file.close()
+        print(Fore.GREEN+'Archivo cargado con éxito')
+        return ruta
+
+    def lector(self, ruta):
+        tree = ET.parse(ruta)
+        ItemList = tree.getroot()
+        for item in ItemList.findall('Item'):
+            codigo = item.find('ItemCode').text
+            cantidad = item.find('QuantityOnHand').text
+            precio1 = item.find('PriceLevel1').text
+            precio2 = item.find('PriceLevel2').text
+            precio3 = item.find('PriceLevel3').text
+            costo = item.find('LastTotalUnitCost').text
+            listaProductos.insertar(Item(codigo, cantidad, precio1, precio2, precio3, costo))
+        listaProductos.imprimir()
+
+    def top10Ganancias(self):
+        print('top10 ganancias')
+
+    def top10Inventario(self):
+        print('Inventario')

@@ -10,7 +10,7 @@ class listaSimple:
     def __init__(self):
         self.cabeza = None
         self.ultimo = None
-        self.tamanio = None
+        self.tamanio = 0
 
     def insertar(self, dato):
         if self.cabeza is None:
@@ -52,4 +52,4 @@ class listaSimple:
         aux = self.cabeza
         while aux is not None:
             print('Code: ', aux.dato.codigo)
-        aux = aux.siguiente
+            aux = aux.siguiente
